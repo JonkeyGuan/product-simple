@@ -81,12 +81,12 @@ spec:
       volumes:
       - name: data-volume
         configMap:
-          name: data
+          name: product-data
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: data
+  name: product-data
 data:
   data.json: |
     [
