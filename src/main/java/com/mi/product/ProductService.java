@@ -32,7 +32,7 @@ public class ProductService {
     @Value("${data.filename}")
     private String dataFilename;
 
-    public List<Product> getCustomers() {
+    public List<Product> getProducts() {
         List<Product> result = null;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

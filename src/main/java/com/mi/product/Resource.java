@@ -18,6 +18,6 @@ public class Resource {
 
     @GetMapping(path = "/products")
     public List<Product> products() {
-        return service.getCustomers();
+        return service.getProducts();
     }
 }
