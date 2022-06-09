@@ -11,15 +11,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 @Service
 public class ProductService {
@@ -32,9 +33,10 @@ public class ProductService {
     @Value("${data.filename}")
     private String dataFilename;
 
-    public List<Product> getProducts() {
+    public List<Product> getProducts(String factory) {
         List<Product> result = null;
 
+        List<Product> products = null;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type type = new TypeToken<List<Product>>() {
         }.getType();
@@ -47,10 +49,12 @@ public class ProductService {
                 stream = this.getClass().getClassLoader().getResourceAsStream(dataFilename);
             }
 
-            result = gson.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), type);
+            products = gson.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), type);
         } catch (FileNotFoundException e) {
             result = new ArrayList<>();
         }
+
+        result = products.stream().filter(p -> p.getFactory().equals(factory)).collect(Collectors.toList());
 
         log.info("loaded: {}", gson.toJson(result));
         return result;

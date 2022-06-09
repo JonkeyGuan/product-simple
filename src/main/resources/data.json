@@ -3,12 +3,15 @@
         "id": "0091-20-100431",
         "name": "呼吸机",
         "unitId": "EA",
-        "unitName": "台"
+        "unitName": "台",
+        "factory": "1000"
+
     },
     {
         "id": "0091-20-100432",
         "name": "氧气瓶",
         "unitId": "EA",
-        "unitName": "个"
+        "unitName": "个",
+        "factory": "1001"
     }
 ]

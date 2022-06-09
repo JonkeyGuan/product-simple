@@ -9,5 +9,6 @@ public class Product{
     private String name;
     private String unitId;
     private String unitName;
+    private String factory;
 
 }
